@@ -6,7 +6,7 @@ Sistema web para gerenciamento e triagem de chamados da TI da Secretaria dos Dir
 
 ## 🚀 Tecnologias Utilizadas
 
-* **Framework:** Laravel 11
+* **Framework:** Laravel 13
 * **Reatividade:** Livewire 3
 * **Estilização:** Tailwind CSS (Institutional Blue UI)
 * **Banco de Dados:** MySQL
