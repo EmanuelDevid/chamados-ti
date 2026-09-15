@@ -14,6 +14,12 @@ class ShowTicket extends Component
 
     public function mount(Ticket $ticket)
     {
+        // Verifica se o usuário logado É o criador do chamado OU se é Admin/TI
+        // Altere 'is_admin' pelo campo correto do seu banco de dados (ex: role === 'admin')
+        if ($ticket->user_id !== auth()->id() && !auth()->user()->is_admin) {
+            abort(403, 'Acesso não autorizado a este chamado.');
+        }
+
         $this->ticket = $ticket;
         $this->newStatus = $ticket->status;
     }
@@ -46,7 +52,6 @@ class ShowTicket extends Component
 
         $newStatusLabel = $this->getStatusLabel($this->newStatus);
 
-        // Registra o log no histórico do chamado
         $this->ticket->messages()->create([
             'user_id' => auth()->id(),
             'message' => "Alterou o status do chamado de '{$oldStatus}' para '{$newStatusLabel}'.",
@@ -72,7 +77,7 @@ class ShowTicket extends Component
     public function render()
     {
         return view('livewire.show-ticket', [
-        'messages' => $this->ticket->messages()->with('user')->get(),
-    ])->layout('layouts.app');
+            'messages' => $this->ticket->messages()->with('user')->get(),
+        ])->layout('layouts.app');
     }
 }

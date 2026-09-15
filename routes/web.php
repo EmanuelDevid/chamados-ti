@@ -5,7 +5,7 @@ use App\Livewire\Auth\Register;
 use App\Livewire\CreateTicket;
 use App\Livewire\IndexTickets;
 use App\Livewire\MyTickets;
-use App\Livewire\ShowTicket;
+use App\Livewire\Tickets\ShowTicket;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Profile;

@@ -58,6 +58,16 @@ class Ticket extends Model
         return $this->hasMany(TicketInteraction::class);
     }
 
+    public function assignedTo()
+    {
+        return $this->belongsTo(User::class, 'assigned_to_user_id');
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(TicketMessage::class)->oldest();
+    }
+
     // Regra de Cálculo de Prioridade Automática
     public static function calculatePriority(int $subtypeWeight, string $scope, bool $isCriticalDepartment): string
     {
