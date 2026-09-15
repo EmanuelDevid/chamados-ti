@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Ajuste Global de Fonte*/
+html {
+    /* Aumenta a base da fonte */
+    font-size: 110%; 
+}
