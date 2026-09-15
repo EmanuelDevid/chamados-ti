@@ -23,7 +23,7 @@
                 $isQueueDetails = request()->routeIs('tickets.show') && $ticketUserId !== auth()->id();
             @endphp
 
-            {{-- Seção Servidor --}}
+            {{-- Seção Servidor (Visível para todos os usuários) --}}
             <div class="px-3 text-[11px] font-semibold uppercase tracking-wider text-slate-400 my-2">
                 Área do Servidor
             </div>
@@ -59,30 +59,32 @@
                 @endif
             </a>
 
-            {{-- Seção Gestão TI --}}
-            <div class="px-3 text-[11px] font-semibold uppercase tracking-wider text-slate-400 mt-6 mb-2">
-                Gestão TI
-            </div>
-
-            {{-- Fila de Atendimento --}}
-            <a href="{{ route('tickets.index') }}" wire:navigate
-                class="flex items-center justify-between px-3 py-2.5 rounded-md text-sm font-medium transition {{ (request()->routeIs('tickets.index') || $isQueueDetails) ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
-                <div class="flex items-center gap-3 overflow-hidden">
-                    <svg width="20" height="20" class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="max-width: 20px; max-height: 20px;">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
-                    </svg>
-                    <span class="truncate">Fila de Atendimento</span>
+            {{-- Seção Gestão TI (Restrita Apenas a Administradores) --}}
+            @if(auth()->user()->is_admin)
+                <div class="px-3 text-[11px] font-semibold uppercase tracking-wider text-slate-400 mt-6 mb-2">
+                    Gestão TI
                 </div>
 
-                @php
-                $newTicketsCount = \App\Models\Ticket::whereIn('status', ['novo', 'em_atendimento', 'aguardando_usuario'])->count();
-                @endphp
-                @if($newTicketsCount > 0)
-                <span class="bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full animate-pulse flex-shrink-0">
-                    {{ $newTicketsCount }}
-                </span>
-                @endif
-            </a>
+                {{-- Fila de Atendimento --}}
+                <a href="{{ route('tickets.index') }}" wire:navigate
+                    class="flex items-center justify-between px-3 py-2.5 rounded-md text-sm font-medium transition {{ (request()->routeIs('tickets.index') || $isQueueDetails) ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <svg width="20" height="20" class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="max-width: 20px; max-height: 20px;">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                        </svg>
+                        <span class="truncate">Fila de Atendimento</span>
+                    </div>
+
+                    @php
+                    $newTicketsCount = \App\Models\Ticket::whereIn('status', ['novo', 'em_atendimento', 'aguardando_usuario'])->count();
+                    @endphp
+                    @if($newTicketsCount > 0)
+                    <span class="bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full animate-pulse flex-shrink-0">
+                        {{ $newTicketsCount }}
+                    </span>
+                    @endif
+                </a>
+            @endif
 
         </nav>
     </div>
