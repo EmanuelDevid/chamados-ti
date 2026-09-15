@@ -8,6 +8,7 @@ use App\Livewire\MyTickets;
 use App\Livewire\ShowTicket;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Profile;
 
 // Guest Routes
 Route::middleware('guest')->group(function () {
@@ -30,9 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/tickets/{ticket}', ShowTicket::class)->name('tickets.show');
     Route::get('/my-tickets', MyTickets::class)->name('tickets.my-tickets');
 
-    Route::get('/profile', function () {
-        return response('Perfil em desenvolvimento');
-    })->name('profile.edit');
+    Route::get('/profile', Profile::class)->name('profile.edit');
 
     Route::post('/logout', function () {
         Auth::logout();
