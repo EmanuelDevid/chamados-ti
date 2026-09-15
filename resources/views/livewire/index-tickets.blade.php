@@ -21,15 +21,15 @@
             <input type="text" wire:model.live.debounce.300ms="search" placeholder="Buscar por protocolo ou assunto..." class="w-full rounded-md border-slate-300 shadow-sm border p-2 text-sm focus:ring-blue-500 focus:border-blue-500">
         </div>
         <div class="flex gap-3 w-full md:w-auto">
-            <select wire:model.live="statusFilter" class="rounded-md border-slate-300 shadow-sm border p-2 text-sm focus:ring-blue-500 focus:border-blue-500">
+            <!-- <select wire:model.live="statusFilter" class="rounded-md border-slate-300 shadow-sm border p-2 text-sm focus:ring-blue-500 focus:border-blue-500">
                 <option value="">Todos os Status</option>
                 <option value="novo">Novo</option>
                 <option value="em_atendimento">Em Atendimento</option>
                 <option value="aguardando_usuario">Aguardando Usuário</option>
                 <option value="resolvido">Resolvido</option>
                 <option value="fechado">Fechado</option>
-            </select>
-            <select wire:model.live="priorityFilter" class="rounded-md border-slate-300 shadow-sm border p-2 text-sm focus:ring-blue-500 focus:border-blue-500">
+            </select> -->
+            <select wire:model.live="priorityFilter" class="rounded-md border-slate-300 shadow-sm border p-2 text-sm focus:ring-blue-500 focus:border-blue-500 pr-8">
                 <option value="">Todas as Prioridades</option>
                 <option value="critical">Crítico</option>
                 <option value="high">Alta</option>
